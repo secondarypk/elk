@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: splunk-operator-app-download
+  namespace: splunk-operator
+  creationTimestamp: null
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  claimRef: 
+    namespace: splunk-operator
+    name: splunk-operator-app-download
+  hostPath:
+    path: /tmp
+    type: Directory
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: splunk-operator-app-download
+  namespace: splunk-operator
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zeek-deployment
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: zeek
+  template:
+    metadata:
+      labels:
+        app: zeek
+    spec:
+      containers:
+        - name: zeek
+          image: zeek/zeek:latest
+          volumeMounts:
+            - name: zeek-config
+              mountPath: /usr/local/zeek/etc/
+          ports:
+            - containerPort: 4777
+      volumes:
+        - name: zeek-config
+          configMap:
+            name: zeek-config

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zeek-config
+data:
+  node.cfg: |
+    [zeek]
+    type=standalone
+    host=localhost
+
+    [logger]
+    rotation_interval=1d
+    rotation_size=100M
+    log_pipe=/usr/local/zeek/logs/zeek-logs
+
+    [manager]
+    host=localhost
+
+    [worker]
+    interface=eth0
+    lb_method=custom
+    lb_procs=1
+    pin_cpus=1
+    pin_cpus_leaf_spinning=1
+    manager_retry_interval=10s
+    args=-i eth0 -U /usr/local/zeek/spool

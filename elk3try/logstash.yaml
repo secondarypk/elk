@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: logstash
+  namespace: kube-system
+spec:
+  containers:
+    - name: logstash
+      image: kpraneethk2003/logstash
+      workingDir: /usr/share/logstash
+      command: ["bin/logstash", "-f", "pipeline.conf"]
+
